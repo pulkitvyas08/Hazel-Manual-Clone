@@ -3,15 +3,17 @@
 #include <iostream>
 #include <memory>
 #include <utility>
-#include <functional>
 #include <algorithm>
+#include <functional>
 
+#include <string>
 #include <sstream>
 #include <vector>
-#include <string>
 #include <unordered_map>
 #include <unordered_set>
 
+#include "Hazel/Log.h"
+
 #ifdef HZ_PLATFORM_WINDOWS
-	#include <windows.h>
+#include <Windows.h>
 #endif
