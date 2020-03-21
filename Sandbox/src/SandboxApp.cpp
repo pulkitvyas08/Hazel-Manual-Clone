@@ -2,8 +2,9 @@
 
 class ExampleLayer : public Hazel::Layer
 {
-public: 
-	ExampleLayer() : Layer("Example")
+public:
+	ExampleLayer()
+		: Layer("Example")
 	{
 	}
 
@@ -16,6 +17,7 @@ public:
 	{
 		HZ_TRACE("{0}", event);
 	}
+
 };
 
 class Sandbox : public Hazel::Application
@@ -24,6 +26,7 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
+		PushOverlay(new Hazel::ImGuiLayer());
 	}
 
 	~Sandbox()
