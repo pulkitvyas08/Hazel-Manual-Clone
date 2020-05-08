@@ -31,9 +31,9 @@ namespace Hazel {
 		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
 
 		float vertices[3 * 3] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.0f,  0.5f, 0.0f
+			-0.2f, -0.2f, 0.0f,
+			 0.2f, -0.2f, 0.0f,
+			 0.0f,  0.2f, 0.0f,
 		};
 
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -44,7 +44,7 @@ namespace Hazel {
 		glGenBuffers(1, &m_IndexBuffer);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
 
-		unsigned int indices[3] = { 0, 1, 2 };
+		unsigned int indices[4] = { 0, 1, 2 };
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	}
