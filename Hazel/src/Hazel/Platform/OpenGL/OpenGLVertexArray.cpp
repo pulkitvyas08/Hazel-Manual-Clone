@@ -31,6 +31,11 @@ namespace Hazel {
 		glCreateVertexArrays(1, &m_RendererID);
 	}
 
+	OpenGLVertexArray::~OpenGLVertexArray()
+	{
+		glDeleteVertexArrays(1, &m_RendererID);
+	}
+
 	void OpenGLVertexArray::Bind() const
 	{
 		glBindVertexArray(m_RendererID);
@@ -43,6 +48,8 @@ namespace Hazel {
 
 	void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
 	{
+		HZ_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout");
+
 		glBindVertexArray(m_RendererID);
 		vertexBuffer->Bind();
 

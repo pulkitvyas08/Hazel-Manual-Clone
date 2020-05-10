@@ -2,6 +2,7 @@
 #include "VertexArray.h"
 
 #include "Renderer.h"
+#include "Hazel/Platform/OpenGL/OpenGLVertexArray.h"
 
 namespace Hazel {
 	VertexArray* VertexArray::Create()
