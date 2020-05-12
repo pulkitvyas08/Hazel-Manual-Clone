@@ -13,7 +13,7 @@ namespace Hazel {
 
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application() : m_Camera(-2.0f, 2.0f, -2.0f, 2.0f)
+	Application::Application() : m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
 	{
 		HZ_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
@@ -177,15 +177,12 @@ namespace Hazel {
 			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 			RenderCommand::Clear();
 
-			Renderer::BeginScene();
+			m_Camera.SetRotation(45.0f);
 
-			m_BlueShader->Bind();
-			m_BlueShader->UploadUniformMat4("u_ViewProjection", m_Camera.GetViewProjectionMatrix());
-			Renderer::Submit(m_SquareVA);
+			Renderer::BeginScene(m_Camera);
 			
-			m_Shader->Bind();
-			m_Shader->UploadUniformMat4("u_ViewProjection", m_Camera.GetViewProjectionMatrix());
-			Renderer::Submit(m_VertexArray);
+			Renderer::Submit(m_BlueShader, m_SquareVA);
+			Renderer::Submit(m_Shader, m_VertexArray);
 
 			Renderer::EndScene();
 
