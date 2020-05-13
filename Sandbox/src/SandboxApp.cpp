@@ -127,6 +127,19 @@ public:
 
 	void OnUpdate() override
 	{
+		if (Hazel::Input::IsKeyPressed(HZ_KEY_LEFT))
+			m_CameraPosition.x -= m_CameraSpeed;
+
+		if (Hazel::Input::IsKeyPressed(HZ_KEY_RIGHT))
+			m_CameraPosition.x += m_CameraSpeed;
+
+		if (Hazel::Input::IsKeyPressed(HZ_KEY_DOWN))
+			m_CameraPosition.y -= m_CameraSpeed;
+
+		if (Hazel::Input::IsKeyPressed(HZ_KEY_UP))
+			m_CameraPosition.y += m_CameraSpeed;
+
+
 		Hazel::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Hazel::RenderCommand::Clear();
 
@@ -148,25 +161,6 @@ public:
 	
 	void OnEvent(Hazel::Event& event) override
 	{
-		Hazel::EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<Hazel::KeyPressedEvent>(HZ_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
-	}
-
-	bool OnKeyPressedEvent(Hazel::KeyPressedEvent& event)
-	{
-		if (event.GetKeyCode() == HZ_KEY_LEFT)
-			m_CameraPosition.x -= m_CameraSpeed;
-
-		if (event.GetKeyCode() == HZ_KEY_RIGHT)
-			m_CameraPosition.x += m_CameraSpeed;
-
-		if (event.GetKeyCode() == HZ_KEY_DOWN)
-			m_CameraPosition.y -= m_CameraSpeed;
-		
-		if (event.GetKeyCode() == HZ_KEY_UP)
-			m_CameraPosition.y += m_CameraSpeed;
-
-		return false;
 	}
 
 private:
