@@ -125,8 +125,10 @@ public:
 		m_BlueShader.reset(new Hazel::Shader(blueShaderVertexSrc, blueShaderFragmentSrc));
 	}
 
-	void OnUpdate() override
+	void OnUpdate(Hazel::Timestep ts) override
 	{
+		HZ_TRACE("Delta Time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMilliSeconds());
+
 		if (Hazel::Input::IsKeyPressed(HZ_KEY_LEFT))
 			m_CameraPosition.x -= m_CameraMoveSpeed;
 		else if (Hazel::Input::IsKeyPressed(HZ_KEY_RIGHT))
@@ -160,7 +162,6 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
-
 	}
 	
 	void OnEvent(Hazel::Event& event) override
@@ -192,7 +193,6 @@ public:
 
 	~Sandbox()
 	{
-
 	}
 
 };
