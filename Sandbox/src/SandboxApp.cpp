@@ -6,7 +6,7 @@ class ExampleLayer : public Hazel::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
+		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f)
 	{
 		m_VertexArray.reset(Hazel::VertexArray::Create());
 
@@ -130,7 +130,8 @@ public:
 		Hazel::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Hazel::RenderCommand::Clear();
 
-		m_Camera.SetRotation(45.0f);
+		m_Camera.SetPosition(m_CameraPosition);
+		m_Camera.SetRotation(0.0f);
 
 		Hazel::Renderer::BeginScene(m_Camera);
 
@@ -147,7 +148,25 @@ public:
 	
 	void OnEvent(Hazel::Event& event) override
 	{
+		Hazel::EventDispatcher dispatcher(event);
+		dispatcher.Dispatch<Hazel::KeyPressedEvent>(HZ_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
+	}
 
+	bool OnKeyPressedEvent(Hazel::KeyPressedEvent& event)
+	{
+		if (event.GetKeyCode() == HZ_KEY_LEFT)
+			m_CameraPosition.x -= m_CameraSpeed;
+
+		if (event.GetKeyCode() == HZ_KEY_RIGHT)
+			m_CameraPosition.x += m_CameraSpeed;
+
+		if (event.GetKeyCode() == HZ_KEY_DOWN)
+			m_CameraPosition.y -= m_CameraSpeed;
+		
+		if (event.GetKeyCode() == HZ_KEY_UP)
+			m_CameraPosition.y += m_CameraSpeed;
+
+		return false;
 	}
 
 private:
@@ -158,6 +177,8 @@ private:
 	std::shared_ptr<Hazel::VertexArray> m_SquareVA;
 
 	Hazel::OrthographicCamera m_Camera;
+	glm::vec3 m_CameraPosition;
+	float m_CameraSpeed = 0.1f;
 };
 
 class Sandbox : public Hazel::Application
