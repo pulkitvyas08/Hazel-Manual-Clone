@@ -92,7 +92,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(new Hazel::Shader(vertexSrc, fragmentSrc));
+		m_Shader.reset(Hazel::Shader::Create(vertexSrc, fragmentSrc));
 
 		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
@@ -128,7 +128,7 @@ public:
 			}
 		)";
 
-		m_flatColorShader.reset(new Hazel::Shader(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+		m_FlatColorShader.reset(Hazel::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 	}
 
 	void OnUpdate(Hazel::Timestep ts) override
@@ -168,10 +168,10 @@ public:
 				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
 				if (x % 2 == 0)
-					m_flatColorShader->UploadUniformFloat4("u_Color" , redColor);
+					m_FlatColorShader->UploadUniformFloat4("u_Color" , redColor);
 				else
-					m_flatColorShader->UploadUniformFloat4("u_Color", blueColor);
-				Hazel::Renderer::Submit(m_flatColorShader, m_SquareVA, transform);
+					m_FlatColorShader->UploadUniformFloat4("u_Color", blueColor);
+				Hazel::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 		}
 		Hazel::Renderer::Submit(m_Shader, m_VertexArray);
@@ -191,7 +191,7 @@ private:
 	std::shared_ptr<Hazel::Shader> m_Shader;
 	std::shared_ptr<Hazel::VertexArray> m_VertexArray;
 
-	std::shared_ptr<Hazel::Shader> m_flatColorShader;
+	std::shared_ptr<Hazel::Shader> m_FlatColorShader;
 	std::shared_ptr<Hazel::VertexArray> m_SquareVA;
 
 	Hazel::OrthographicCamera m_Camera;
