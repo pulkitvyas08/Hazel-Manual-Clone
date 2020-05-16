@@ -6,6 +6,8 @@
 
 #include "glm/gtc/matrix_transform.hpp"
 
+#include "glm/gtc/type_ptr.hpp"
+
 class ExampleLayer : public Hazel::Layer
 {
 public:
@@ -122,11 +124,11 @@ public:
 
 			in vec3 v_Position;
 
-			uniform vec4 u_Color;
+			uniform vec3 u_Color;
 
 			void main()
 			{
-				color = u_Color;
+				color = vec4(u_Color, 1.0);
 			}
 		)";
 
@@ -179,7 +181,9 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
-
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+		ImGui::End();
 	}
 
 	void OnEvent(Hazel::Event& event) override
