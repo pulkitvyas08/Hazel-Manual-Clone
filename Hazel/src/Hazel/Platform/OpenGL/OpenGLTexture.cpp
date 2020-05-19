@@ -34,7 +34,7 @@ namespace Hazel {
 
 	void OpenGLTexture2D::Bind(uint32_t slot) const
 	{
-		glBindTexture(slot, m_RendererID);
+		glBindTextureUnit(slot, m_RendererID);
 	}
 
 }

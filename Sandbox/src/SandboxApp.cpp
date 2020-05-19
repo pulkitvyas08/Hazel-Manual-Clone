@@ -4,8 +4,8 @@
 
 #include "imgui/imgui.h"
 
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class ExampleLayer : public Hazel::Layer
 {
@@ -139,7 +139,7 @@ public:
 			#extension GL_ARB_separate_shader_objects: enable
 
 			layout(location = 0) in vec3 a_Position;			
-			layout(location = 0) in vec2 a_TexCoord;			
+			layout(location = 1) in vec2 a_TexCoord;			
 
 			uniform mat4 u_ViewProjection;
 			uniform mat4 u_Transform;
@@ -203,7 +203,7 @@ public:
 
 		Hazel::Renderer::BeginScene(m_Camera);
 
-		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
 		std::dynamic_pointer_cast<Hazel::OpenGLShader>(m_FlatColorShader)->Bind();
 		std::dynamic_pointer_cast<Hazel::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
