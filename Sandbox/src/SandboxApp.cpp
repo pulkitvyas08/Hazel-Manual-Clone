@@ -98,8 +98,6 @@ public:
 
 		m_Shader.reset(Hazel::Shader::Create(vertexSrc, fragmentSrc));
 
-		Shader::Create("assets/shaders/Texture.glsl");	
-
 		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
 			#extension GL_ARB_separate_shader_objects: enable
@@ -136,7 +134,7 @@ public:
 
 		m_FlatColorShader.reset(Hazel::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 
-		m_TextureShader.reset(Hazel::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+		m_TextureShader.reset(Hazel::Shader::Create("assets/shaders/Texture.glsl"));
 
 		m_Texture = Hazel::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_ChernoLogoTexture = Hazel::Texture2D::Create("assets/textures/ChernoLogo.png");
