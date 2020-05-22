@@ -96,7 +96,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Hazel::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = Hazel::Shader::Create("VertexPosColor", vertexSrc, fragmentSrc);
 
 		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
@@ -132,9 +132,9 @@ public:
 			}
 		)";
 
-		m_FlatColorShader.reset(Hazel::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+		m_FlatColorShader = Hazel::Shader::Create("FlatColor", flatColorShaderVertexSrc, flatColorShaderFragmentSrc);
 
-		m_TextureShader.reset(Hazel::Shader::Create("assets/shaders/Texture.glsl"));
+		m_TextureShader = Hazel::Shader::Create("assets/shaders/Texture.glsl");
 
 		m_Texture = Hazel::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_ChernoLogoTexture = Hazel::Texture2D::Create("assets/textures/ChernoLogo.png");
